@@ -86,7 +86,7 @@ Language-Learning-System
     │   │   └── quiz.service.js
     │   ├── utils
     │   │   └── api.js
-    │   ├── App.js
+    │   ├── App.jsx
     │   ├── index.js
     │   └── styles
     │       ├── App.module.css
