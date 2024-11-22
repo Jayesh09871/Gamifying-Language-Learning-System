@@ -65,21 +65,21 @@ Language-Learning-System
     │   └── manifest.json
     ├── src
     │   ├── components
-    │   │   ├── Navbar.js
-    │   │   ├── LessonCard.js
-    │   │   ├── QuizCard.js
-    │   │   └── ProgressTracker.js
+    │   │   ├── Navbar.jsx
+    │   │   ├── LessonCard.jsx
+    │   │   ├── QuizCard.jsx
+    │   │   └── ProgressTracker.jsx
     │   ├── contexts
     │   │   ├── AuthContext.js
     │   │   └── UserContext.js
     │   ├── hooks
     │   │   └── useFetch.js
     │   ├── pages
-    │   │   ├── Home.js
-    │   │   ├── Lessons.js
-    │   │   ├── Quizzes.js
-    │   │   ├── Leaderboard.js
-    │   │   └── Profile.js
+    │   │   ├── Home.jsx
+    │   │   ├── Lessons.jsx
+    │   │   ├── Quizzes.jsx
+    │   │   ├── Leaderboard.jsx
+    │   │   └── Profile.jsx
     │   ├── services
     │   │   ├── auth.service.js
     │   │   ├── lesson.service.js
