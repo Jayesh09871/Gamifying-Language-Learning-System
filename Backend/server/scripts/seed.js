@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const Quiz = require('../models/Quiz');
-const questions = require('../data/questions');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import Quiz from '../models/Quiz.js';
+import { questions } from '../data/questions.js';
 
 dotenv.config();
 
 async function seedDatabase() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
     // Clear existing quizzes

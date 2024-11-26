@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node server/index.js",
-    "seed": "node server/scripts/seed.js"
-  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "npx nodemon server/index.js", 
+  "server": "npx nodemon server/index.js",
+  "seed": "npx nodemon server/scripts/seed.js"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,5 +20,8 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
