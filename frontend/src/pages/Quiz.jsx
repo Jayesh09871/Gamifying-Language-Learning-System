@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle} from 'lucide-react';
+import { ArrowLeft, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
@@ -8,49 +8,55 @@ function Quiz() {
   const { language } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [answers, setAnswers] = useState([]);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('Fetching quiz for language:', language);
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/quiz/${language}`);
+        const response = await axios.get(`http://localhost:3000/${language}`);
+        console.log('Quiz questions:', response.data);
         setQuestions(response.data);
-        setLoading(false);
       } catch (error) {
-        console.error('Error fetching questions:', error);
+        console.error('Error fetching questions:', error.response || error.message);
+        alert('Failed to load quiz questions. Please try again later.');
+      } finally {
         setLoading(false);
       }
     };
-
+    
     fetchQuestions();
   }, [language]);
-
+  
   const handleAnswerSelect = (answer) => {
     setSelectedAnswer(answer);
   };
 
   const handleNextQuestion = async () => {
-    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
-      setScore(score + 1);
-    }
+    const correctAnswer = questions[currentQuestion].correctAnswer;
+    const isCorrect = selectedAnswer === correctAnswer;
+    setScore((prev) => (isCorrect ? prev + 1 : prev));
+    setAnswers((prev) => [...prev, { questionId: questions[currentQuestion].id, answer: selectedAnswer, isCorrect }]);
 
     if (currentQuestion + 1 < questions.length) {
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion((prev) => prev + 1);
       setSelectedAnswer('');
     } else {
-      // Submit final score
       try {
-        await axios.post(`http://localhost:3000/api/quiz/${language}/submit`, {
+        await axios.post(`http://localhost:3000/${language}/submit`, {
           userId: user?.id,
-          answers: [selectedAnswer],
+          answers,
         });
       } catch (error) {
         console.error('Error submitting score:', error);
+        alert('Failed to submit quiz results. Please check your network connection.');
       }
       setShowResult(true);
     }

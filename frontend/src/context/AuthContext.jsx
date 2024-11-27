@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('http://localhost:3000/api/auth/verify', {
+      axios.get('http://localhost:3000/verify', {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   // Login function (takes email and password)
   const login = async (email, password) => {
-    const response = await axios.post('http://localhost:3000/api/auth/login', {
+    const response = await axios.post('http://localhost:3000//login', {
       email,
       password
     });
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
   // Signup function (takes name, email, password)
   const signup = async (name, email, password) => {
-    const response = await axios.post('http://localhost:3000/api/auth/signup', {
+    const response = await axios.post('http://localhost:3000/signup', {
       name,
       email,
       password

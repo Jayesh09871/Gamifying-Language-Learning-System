@@ -2,11 +2,12 @@ const express = require('express');
 const Quiz = require('../models/Quiz');
 const User = require('../models/User');
 const { auth } = require('../middleware/auth');
+const q = require('../data/questions')
 
 const router = express.Router();
 
 // Get quiz questions for a specific language
-router.get('/:language', auth, async (req, res) => {
+router.get('/:language', async (req, res) => {
   try {
     const { language } = req.params;
     const quiz = await Quiz.findOne({ language });
@@ -29,6 +30,7 @@ router.post('/:language/submit', auth, async (req, res) => {
     const userId = req.userId;
 
     const quiz = await Quiz.findOne({ language });
+
     if (!quiz) {
       return res.status(404).json({ message: 'Quiz not found' });
     }
@@ -80,4 +82,9 @@ router.get('/leaderboard', async (req, res) => {
   }
 });
 
+router.post("/add",async(req, res)=>{
+  const send = await Quiz.create(req.body);
+  res.send(send);
+})
+router.get("/d",(req,res)=> res.send({h : "dfdfdf"}))
 module.exports = router;
