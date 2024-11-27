@@ -23,7 +23,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/quiz/leaderboard');
+        const response = await axios.get('http://localhost:3000/leaderboard');
         setLeaderboard(response.data); // Update state with the data from the API
         setLoading(false);
       } catch (error) {
